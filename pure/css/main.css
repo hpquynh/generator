@@ -1,0 +1,40 @@
+/* common */
+body { background-color: #fff; color: #000; font-family: serif; font-size: 16px; }
+
+/* img */
+img { vertical-align: top; }
+
+/* hyperlink */
+a:link, a:visited { color: #c00; text-decoration: none; }
+a:hover { color: #000; }
+
+.csstransitions a {
+  -webkit-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+}
+
+/* form */
+input[type="text"], input[type="email"], textarea { outline: none; -webkit-appearance: none; }
+
+.borderradius input, .borderradius textarea, .borderradius button { -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+.boxshadow input, .boxshadow textarea, .boxshadow button { -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none; }
+.boxsizing input, .boxsizing textarea, .boxsizing button { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+
+.csstransitions input, .csstransitions textarea, .csstransitions button {
+  -webkit-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+  -moz-transition: background-color .3s ease-in-out, color .3s ease-in-out;
+  transition: background-color .3s ease-in-out, color .3s ease-in-out;
+}
+
+/* container */
+.container { margin-left: auto; margin-right: auto; }
+
+/* header */
+.header {}
+
+/* footer */
+.footer {}
+
+/* main */
+.main {}
