@@ -1,9 +1,7 @@
 #Front-end Generators
-For making life of front-end developer better, I created a set of generator to server multiple purposes.
+For making life of front-end developer better, I created a set of generator to server multiple purposes. They are for front-end development only.
 
-They are for front-end development only.
-
-----------
+Copyright (c) 2014 Le Bao Phuc
 
 ##Pure & Email Generator
 
@@ -29,8 +27,6 @@ They are created by reusing and optimizing [XH Generator](https://github.com/xht
 
 ###Recommendation
 Please read more about `node`, `grunt`, `scss` or `less` to get familiar with these things and then utilize features in each generator.
-
-Feel free to use.
 
 ###Release Notes
 
