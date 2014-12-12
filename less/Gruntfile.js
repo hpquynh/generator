@@ -157,7 +157,7 @@ module.exports = function(grunt) {
       },
       html: {
         files: '<%= ilu.src %>/**/*.html',
-        tasks: ['build-htmlmin']
+        tasks: ['build-html']
       },
       js: {
         files: '<%= ilu.src %>/js/main.js',
@@ -178,11 +178,8 @@ module.exports = function(grunt) {
     'copy:plugins',
     'copy:assets'
   ]);
-  grunt.registerTask('build-htmlmin', [
-    'includereplace'
-  ]);
   grunt.registerTask('build-html', [
-    'build-htmlmin',
+    'includereplace',
     'useminPrepare',
     'concat:generated',
     'uglify:generated',
