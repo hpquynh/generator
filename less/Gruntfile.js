@@ -10,117 +10,131 @@ module.exports = function(grunt) {
   // Config
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    ilu: {
+
+    base: {
       src: 'src',
       dist: 'dist',
       tmp: '.tmp',
-      build: ['header.html', 'footer.html'],
-      includes: '<%= ilu.src %>/includes',
-      plugins: ['jquery.min.js', 'modernizr.min.js']
+      build: ['head.html', 'script.html'],
+      includes: '<%= base.src %>/includes',
+      plugins: [
+        'jquery.min.js',
+        'modernizr.min.js'
+      ]
     },
+
     useminPrepare: {
       html: {
-        src: '<%= ilu.build %>',
-        cwd: '<%= ilu.includes %>',
+        src: '<%= base.build %>',
+        cwd: '<%= base.includes %>',
         expand: true
       },
       options: {
-        dest: '<%= ilu.dist %>',
-        root: '<%= ilu.src %>',
+        dest: '<%= base.dist %>',
+        root: '<%= base.src %>',
         flow: {
           steps: {'js': ['concat', 'uglifyjs']},
           post: {}
         }
       }
     },
+
     usemin: {
       html: {
         src: '*.html',
-        cwd: '<%= ilu.dist %>',
+        cwd: '<%= base.dist %>',
         expand: true
       }
     },
+
     clean: {
-      tmp: '<%= ilu.tmp %>',
-      dist: ['<%= ilu.dist %>']
+      tmp: '<%= base.tmp %>',
+      dist: ['<%= base.dist %>']
     },
+
     copy: {
       plugins: {
-        src: '<%= ilu.plugins %>',
-        cwd: '<%= ilu.src %>/js',
-        dest: '<%= ilu.dist %>/js',
+        src: '<%= base.plugins %>',
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.dist %>/js',
         expand: true
       },
       js: {
         src: 'main.js',
-        cwd: '<%= ilu.src %>/js',
-        dest: '<%= ilu.dist %>/js',
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.dist %>/js',
         expand: true
       },
       assets: {
         files: [
           {
             src: ['**/*.*', '!remove.*'],
-            cwd: '<%= ilu.src %>/img',
-            dest: '<%= ilu.dist %>/img',
+            cwd: '<%= base.src %>/img',
+            dest: '<%= base.dist %>/img',
             expand: true
           },
           {
             src: ['**/*.*', '!remove.*'],
-            cwd: '<%= ilu.src %>/font',
-            dest: '<%= ilu.dist %>/font',
+            cwd: '<%= base.src %>/font',
+            dest: '<%= base.dist %>/font',
             expand: true
           },
           {
             src: ['**/*.css', '!remove.*'],
-            cwd: '<%= ilu.src %>/css',
-            dest: '<%= ilu.dist %>/css',
+            cwd: '<%= base.src %>/css',
+            dest: '<%= base.dist %>/css',
             expand: true
           }
         ]
       }
     },
+
     includereplace: {
       dist: {
         options: {
-          includesDir: '<%= ilu.includes %>'
+          includesDir: '<%= base.includes %>'
         },
         files: [
           {
             src: ['*.html', '!template.html'],
-            cwd: '<%= ilu.src %>',
-            dest: '<%= ilu.dist %>',
+            cwd: '<%= base.src %>',
+            dest: '<%= base.dist %>',
             expand: true
           }
         ]
       }
     },
+
     jsbeautifier: {
       options : {
         js: {
           indentSize: 2
         }
       },
-      js: '<%= ilu.dist %>/js/main.js'
+      js: '<%= base.dist %>/js/main.js'
     },
+
     cssbeautifier: {
       options : {
         indent: '  '
       },
-      files: '<%= ilu.dist %>/css/main.css'
+      files: '<%= base.dist %>/css/main.css'
     },
+
     uglify: {
       options: {
         preserveComments: 'some'
       }
     },
+
     jshint: {
       options: {
         jshintrc: true,
         force: true
       },
-      files: ['<%= ilu.src %>/js/main.js']
+      files: ['<%= base.src %>/js/main.js']
     },
+
     less: {
       dist: {
         options: {
@@ -130,41 +144,56 @@ module.exports = function(grunt) {
         files: [
           {
             src: 'main.less',
-            cwd: '<%= ilu.src %>/less/',
-            dest: '<%= ilu.dist %>/css/',
+            cwd: '<%= base.src %>/less/',
+            dest: '<%= base.dist %>/css/',
             ext: '.css',
             expand: true
           }
         ]
       }
     },
+
+    remfallback: {
+      options: {
+        replace: true,
+        round: true,
+        mediaQuery: true
+      },
+      main: {
+        files: {
+          '<%= base.dist %>/css/main.css' : '<%= base.dist %>/css/main.css'
+        }
+      },
+    },
+
     autoprefixer: {
       options: {
         browsers: ['last 10 versions']
       },
       main: {
-        src: '<%= ilu.dist %>/css/main.css',
-        dest: '<%= ilu.dist %>/css/main.css'
+        src: '<%= base.dist %>/css/main.css',
+        dest: '<%= base.dist %>/css/main.css'
       }
     },
+
     watch: {
       options: {
         spawn: false
       },
       less: {
-        files: '<%= ilu.src %>/less/**/*.less',
+        files: '<%= base.src %>/less/**/*.less',
         tasks: ['build-less']
       },
       html: {
-        files: '<%= ilu.src %>/**/*.html',
+        files: '<%= base.src %>/**/*.html',
         tasks: ['build-html']
       },
       js: {
-        files: '<%= ilu.src %>/js/main.js',
+        files: '<%= base.src %>/js/*.js',
         tasks: ['build-js']
       },
       assets: {
-        files: ['<%= ilu.src %>/{img,font,css}/*.*'],
+        files: ['<%= base.src %>/{img,font,css}/*.*'],
         tasks: ['build-assets']
       }
     }
@@ -174,10 +203,11 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'watch'
   ]);
+
   grunt.registerTask('build-assets', [
-    'copy:plugins',
     'copy:assets'
   ]);
+
   grunt.registerTask('build-html', [
     'includereplace',
     'useminPrepare',
@@ -185,16 +215,21 @@ module.exports = function(grunt) {
     'uglify:generated',
     'usemin'
   ]);
+
   grunt.registerTask('build-less', [
     'less',
     'autoprefixer',
+    'remfallback',
     'cssbeautifier'
   ]);
+
   grunt.registerTask('build-js', [
+    'copy:plugins',
     'copy:js',
     'jsbeautifier',
     'jshint'
   ]);
+
   grunt.registerTask('build', [
     'clean:dist',
     'build-assets',

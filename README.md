@@ -31,6 +31,7 @@ Please read more about `node`, `grunt`, `scss` or `less` to get familiar with th
 ###Release Notes
 
 * 1.0.0: initial release
+* 1.1.0: update includes template, add remfallback, update build tasks
 
 ###General Notes
 
