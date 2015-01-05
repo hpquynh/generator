@@ -1,0 +1,18 @@
+// Clearfix
+.clearfix() {
+  &:after,
+  &:before {
+    display: table;
+    content: "";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// Block Reset
+.block-reset() {
+  margin: 0;
+  padding: 0;
+}
