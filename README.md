@@ -21,8 +21,8 @@ They are created by reusing and optimizing [XH Generator](https://github.com/xht
 ###How to use
 
  - pick up one generator, SCSS or LESS
- - run `npm install` from command line to set up project
- - run `grunt qa` to build all project at once
+ - run `npm install` to set up project
+ - run `grunt build` to build the entire project
  - run `grunt watch` to watch any change in developing
 
 ###Recommendation

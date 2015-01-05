@@ -235,13 +235,6 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'build-assets',
-    'build-allhtml',
-    'build-less',
-    'build-alljs'
-  ]);
-
-  grunt.registerTask('qa', [
     'clean:dist',
     'build-assets',
     'build-html',
