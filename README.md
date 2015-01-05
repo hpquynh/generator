@@ -22,7 +22,7 @@ They are created by reusing and optimizing [XH Generator](https://github.com/xht
 
  - pick up one generator, SCSS or LESS
  - run `npm install` from command line to set up project
- - run `grunt build` to build all project at once
+ - run `grunt qa` to build all project at once
  - run `grunt watch` to watch any change in developing
 
 ###Recommendation
@@ -32,6 +32,7 @@ Please read more about `node`, `grunt`, `scss` or `less` to get familiar with th
 
 * 1.0.0: initial release
 * 1.1.0: update includes template, add remfallback, update build tasks
+* 1.2.0: remove remfallback, update devs, update stuff (jquery, html,...)
 
 ###General Notes
 

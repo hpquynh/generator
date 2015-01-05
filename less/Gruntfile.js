@@ -19,7 +19,8 @@ module.exports = function(grunt) {
       includes: '<%= base.src %>/includes',
       plugins: [
         'jquery.min.js',
-        'modernizr.min.js'
+        'modernizr.min.js',
+        'oldie.min.js'
       ]
     },
 
@@ -61,6 +62,12 @@ module.exports = function(grunt) {
       },
       js: {
         src: 'main.js',
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.dist %>/js',
+        expand: true
+      },
+      alljs: {
+        src: '*.*',
         cwd: '<%= base.src %>/js',
         dest: '<%= base.dist %>/js',
         expand: true
@@ -153,19 +160,6 @@ module.exports = function(grunt) {
       }
     },
 
-    remfallback: {
-      options: {
-        replace: true,
-        round: true,
-        mediaQuery: true
-      },
-      main: {
-        files: {
-          '<%= base.dist %>/css/main.css' : '<%= base.dist %>/css/main.css'
-        }
-      },
-    },
-
     autoprefixer: {
       options: {
         browsers: ['last 10 versions']
@@ -186,14 +180,14 @@ module.exports = function(grunt) {
       },
       html: {
         files: '<%= base.src %>/**/*.html',
-        tasks: ['build-html']
+        tasks: ['build-allhtml']
       },
       js: {
         files: '<%= base.src %>/js/*.js',
-        tasks: ['build-js']
+        tasks: ['build-alljs']
       },
       assets: {
-        files: ['<%= base.src %>/{img,font,css}/*.*'],
+        files: '<%= base.src %>/{img,font,css}/*.*',
         tasks: ['build-assets']
       }
     }
@@ -208,6 +202,11 @@ module.exports = function(grunt) {
     'copy:assets'
   ]);
 
+  grunt.registerTask('build-allhtml', [
+    'includereplace'
+  ]);
+
+
   grunt.registerTask('build-html', [
     'includereplace',
     'useminPrepare',
@@ -219,7 +218,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build-less', [
     'less',
     'autoprefixer',
-    'remfallback',
     'cssbeautifier'
   ]);
 
@@ -230,7 +228,20 @@ module.exports = function(grunt) {
     'jshint'
   ]);
 
+  grunt.registerTask('build-alljs', [
+    'copy:alljs',
+    'jsbeautifier',
+    'jshint'
+  ]);
+
   grunt.registerTask('build', [
+    'build-assets',
+    'build-allhtml',
+    'build-less',
+    'build-alljs'
+  ]);
+
+  grunt.registerTask('qa', [
     'clean:dist',
     'build-assets',
     'build-html',
