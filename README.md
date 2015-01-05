@@ -16,6 +16,7 @@ It's simpler without any setup step and reduce unnecessary tasks.
 ###Requirement
 
 * [Node](http://nodejs.org/)
+* [Grunt](http://gruntjs.com/)
 * [Ruby for Windows](http://rubyinstaller.org/)
 * [SASS](http://sass-lang.com/)
 * [LESS](http://lesscss.org/)
@@ -31,16 +32,16 @@ Please read more about `node`, `grunt`, `scss` or `less` to get familiar with th
 
 ###Release Notes
 
-* 1.0.0: initial release
-* 1.1.0:
-  * update includes template
-  * add remfallback
-  * update build tasks
 * 1.2.0:
   * remove remfallback
   * update dev dependencies
   * update stuff (jquery, html, template,...)
   * add common mixins
+* 1.1.0:
+  * update includes template
+  * add remfallback
+  * update build tasks
+* 1.0.0: initial release
 
 ###General Notes
 
