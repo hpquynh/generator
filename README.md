@@ -1,5 +1,5 @@
 #Front-end Generators
-For making life of front-end developer better, I created a set of generator to serve multiple purposes. They are for front-end development only.
+A set of generator to serve multiple purposes. They are for front-end development only.
 
 Copyright (c) 2014 Le Bao Phuc
 
@@ -23,12 +23,9 @@ It's simpler without any setup step and reduce unnecessary tasks.
 
 ###How to use
 
-* `npm install` to set up project
+* `npm install` to install required dependencies
 * `grunt build` to build the entire project
 * `grunt watch` to watch any change in developing
-
-###Recommendation
-Please read more about `node`, `grunt`, `scss` or `less` to get familiar with these things and then utilize features in each generator.
 
 ###Release Notes
 
