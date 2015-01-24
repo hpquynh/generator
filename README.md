@@ -29,6 +29,9 @@ It's simpler without any setup step and reduce unnecessary tasks.
 
 ###Release Notes
 
+* 1.3.0:
+  * remove cssbeautifier
+  * add csscomb
 * 1.2.0:
   * remove remfallback
   * update dev dependencies

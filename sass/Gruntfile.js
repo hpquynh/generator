@@ -121,9 +121,9 @@ module.exports = function(grunt) {
       js: '<%= base.dist %>/js/main.js'
     },
 
-    cssbeautifier: {
+    csscomb: {
       options : {
-        indent: '  '
+        config: 'csscomb.json'
       },
       files: '<%= base.dist %>/css/main.css'
     },
@@ -218,7 +218,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build-scss', [
     'sass',
     'autoprefixer',
-    'cssbeautifier'
+    'csscomb'
   ]);
 
   grunt.registerTask('build-js', [
