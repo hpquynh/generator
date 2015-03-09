@@ -1,13 +1,14 @@
 /* common */
 html {
-  color: #222;
   font-size: 1em;
 }
 
 body {
+  background-color: #fff;
+  color: #000;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 ::-moz-selection {
@@ -21,7 +22,7 @@ body {
 
 hr {
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: #ccc solid 1px;
   display: block;
   height: 1px;
   margin: 1em 0;
@@ -37,14 +38,48 @@ video {
   vertical-align: middle;
 }
 
+img {
+  vertical-align: top;
+}
+
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
+input[type="text"],
+input[type="email"],
+textarea {
+  appearance: none;
+  outline: none;
+}
+
+input,
+textarea,
+button {
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
 textarea {
   resize: vertical;
+}
+
+a {
+  color: #c00;
+  text-decoration: none;
+}
+a:hover {
+  color: #000;
+}
+
+a,
+input,
+textarea,
+button {
+  transition: background-color .2s ease-out, border-color .2s ease-out, color .2s ease-out;
 }
 
 /* helper */
