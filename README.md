@@ -10,8 +10,7 @@ For email, there is one more template optimized for real project, beside the ori
 
 ##SCSS & LESS Generator
 
-Created by reusing and optimizing [XH Generator](https://github.com/xhtmlized/generator-xh).
-It's simpler without any setup step and reduce unnecessary tasks.
+These are inspired by [XH Generator](https://github.com/xhtmlized/generator-xh) but simpler by removing setup step and reducing unnecessary tasks.
 
 ###Requirement
 
@@ -32,6 +31,7 @@ It's simpler without any setup step and reduce unnecessary tasks.
 * 1.3.0:
   * remove cssbeautifier
   * add csscomb
+  * minor changes
 * 1.2.0:
   * remove remfallback
   * update dev dependencies
