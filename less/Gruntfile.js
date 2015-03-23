@@ -3,8 +3,7 @@ module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
   require('jit-grunt')(grunt, {
-    includereplace: 'grunt-include-replace',
-    useminPrepare: 'grunt-usemin'
+    includereplace: 'grunt-include-replace'
   });
 
   // Config
@@ -14,85 +13,39 @@ module.exports = function(grunt) {
     base: {
       src: 'src',
       dist: 'dist',
-      tmp: '.tmp',
-      build: ['head.html', 'script.html'],
-      includes: '<%= base.src %>/includes',
-      plugins: [
-        'jquery.min.js',
-        'modernizr.min.js',
-        'oldie.min.js'
-      ]
-    },
-
-    useminPrepare: {
-      html: {
-        src: '<%= base.build %>',
-        cwd: '<%= base.includes %>',
-        expand: true
-      },
-      options: {
-        dest: '<%= base.dist %>',
-        root: '<%= base.src %>',
-        flow: {
-          steps: {'js': ['concat', 'uglifyjs']},
-          post: {}
-        }
-      }
-    },
-
-    usemin: {
-      html: {
-        src: '*.html',
-        cwd: '<%= base.dist %>',
-        expand: true
-      }
+      temp: 'temp',
+      includes: '<%= base.src %>/includes'
     },
 
     clean: {
-      tmp: '<%= base.tmp %>',
-      dist: ['<%= base.dist %>']
+      tmp: '<%= base.temp %>',
+      dist: '<%= base.dist %>'
     },
 
     copy: {
-      plugins: {
-        src: '<%= base.plugins %>',
-        cwd: '<%= base.src %>/js',
-        dest: '<%= base.dist %>/js',
+      font: {
+        src: ['**/*.*', '!remove.*'],
+        cwd: '<%= base.src %>/font',
+        dest: '<%= base.dist %>/font',
+        expand: true
+      },
+      img: {
+        src: ['**/*.*', '!remove.*'],
+        cwd: '<%= base.src %>/img',
+        dest: '<%= base.dist %>/img',
+        expand: true
+      },
+      css: {
+        src: ['**/*.*', '!remove.*'],
+        cwd: '<%= base.src %>/css',
+        dest: '<%= base.dist %>/css',
         expand: true
       },
       js: {
-        src: 'main.js',
+        src: ['**/*.*', '!remove.*'],
         cwd: '<%= base.src %>/js',
         dest: '<%= base.dist %>/js',
         expand: true
-      },
-      alljs: {
-        src: '*.*',
-        cwd: '<%= base.src %>/js',
-        dest: '<%= base.dist %>/js',
-        expand: true
-      },
-      assets: {
-        files: [
-          {
-            src: ['**/*.*', '!remove.*'],
-            cwd: '<%= base.src %>/img',
-            dest: '<%= base.dist %>/img',
-            expand: true
-          },
-          {
-            src: ['**/*.*', '!remove.*'],
-            cwd: '<%= base.src %>/font',
-            dest: '<%= base.dist %>/font',
-            expand: true
-          },
-          {
-            src: ['**/*.css', '!remove.*'],
-            cwd: '<%= base.src %>/css',
-            dest: '<%= base.dist %>/css',
-            expand: true
-          }
-        ]
       }
     },
 
@@ -101,45 +54,13 @@ module.exports = function(grunt) {
         options: {
           includesDir: '<%= base.includes %>'
         },
-        files: [
-          {
-            src: ['*.html', '!template.html'],
-            cwd: '<%= base.src %>',
-            dest: '<%= base.dist %>',
-            expand: true
-          }
-        ]
+        files: [{
+          src: ['*.html', '!template.html'],
+          cwd: '<%= base.src %>',
+          dest: '<%= base.dist %>',
+          expand: true
+        }]
       }
-    },
-
-    jsbeautifier: {
-      options : {
-        js: {
-          indentSize: 2
-        }
-      },
-      js: '<%= base.dist %>/js/main.js'
-    },
-
-    csscomb: {
-      options : {
-        config: 'csscomb.json'
-      },
-      files: '<%= base.dist %>/css/main.css'
-    },
-
-    uglify: {
-      options: {
-        preserveComments: 'some'
-      }
-    },
-
-    jshint: {
-      options: {
-        jshintrc: true,
-        force: true
-      },
-      files: ['<%= base.src %>/js/main.js']
     },
 
     less: {
@@ -148,21 +69,19 @@ module.exports = function(grunt) {
           sourceMap: false,
           compress: false
         },
-        files: [
-          {
-            src: 'main.less',
-            cwd: '<%= base.src %>/less/',
-            dest: '<%= base.dist %>/css/',
-            ext: '.css',
-            expand: true
-          }
-        ]
+        files: [{
+          src: 'main.less',
+          cwd: '<%= base.src %>/less',
+          dest: '<%= base.dist %>/css',
+          ext: '.css',
+          expand: true
+        }]
       }
     },
 
     autoprefixer: {
       options: {
-        browsers: ['last 2 versions']
+        browsers: 'last 2 versions'
       },
       main: {
         src: '<%= base.dist %>/css/main.css',
@@ -170,24 +89,43 @@ module.exports = function(grunt) {
       }
     },
 
+    csscomb: {
+      options: {
+        config: 'csscomb.json'
+      },
+      dist: {
+        files: {
+          '<%= base.dist %>/css/main.css': ['<%= base.dist %>/css/main.css']
+        }
+      }
+    },
+
+    jshint: {
+      options: {
+        jshintrc: true,
+        force: true
+      },
+      files: '<%= base.src %>/js/main.js'
+    },
+
     watch: {
       options: {
         spawn: false
+      },
+      html: {
+        files: '<%= base.src %>/**/*.html',
+        tasks: ['build-html']
       },
       less: {
         files: '<%= base.src %>/less/**/*.less',
         tasks: ['build-less']
       },
-      html: {
-        files: '<%= base.src %>/**/*.html',
-        tasks: ['build-allhtml']
-      },
       js: {
         files: '<%= base.src %>/js/*.js',
-        tasks: ['build-alljs']
+        tasks: ['build-js']
       },
       assets: {
-        files: '<%= base.src %>/{img,font,css}/*.*',
+        files: '<%= base.src %>/{font,img,css}/*.*',
         tasks: ['build-assets']
       }
     }
@@ -198,21 +136,8 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  grunt.registerTask('build-assets', [
-    'copy:assets'
-  ]);
-
-  grunt.registerTask('build-allhtml', [
-    'includereplace'
-  ]);
-
-
   grunt.registerTask('build-html', [
-    'includereplace',
-    'useminPrepare',
-    'concat:generated',
-    'uglify:generated',
-    'usemin'
+    'includereplace'
   ]);
 
   grunt.registerTask('build-less', [
@@ -222,22 +147,20 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build-js', [
-    'copy:plugins',
     'copy:js',
-    'jsbeautifier',
     'jshint'
   ]);
 
-  grunt.registerTask('build-alljs', [
-    'copy:alljs',
-    'jsbeautifier',
-    'jshint'
+  grunt.registerTask('build-assets', [
+    'copy:font',
+    'copy:img',
+    'copy:css'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
-    'build-assets',
     'build-html',
+    'build-assets',
     'build-less',
     'build-js',
     'clean:tmp'

@@ -3,12 +3,12 @@ A set of generator to serve multiple purposes. They are for front-end developmen
 
 Copyright (c) 2014 Le Bao Phuc
 
-##Pure & Email Generator
+##Pure & Email
 
 Based on [h5bp.com](http://html5boilerplate.com/) and [its project](http://htmlemailboilerplate.com/), but more simpler.
 For email, there is one more template optimized for real project, beside the original sources.
 
-##SCSS & LESS Generator
+##SCSS & LESS
 
 These are inspired by [XH Generator](https://github.com/xhtmlized/generator-xh) but simpler by removing setup step and reducing unnecessary tasks.
 
@@ -28,6 +28,11 @@ These are inspired by [XH Generator](https://github.com/xhtmlized/generator-xh) 
 
 ###Release Notes
 
+* 1.4.0:
+  * remove usemin, concat, uglify, jsbeautifier
+  * update csscomb
+  * update tasks
+  * minor changes
 * 1.3.0:
   * remove cssbeautifier
   * add csscomb
