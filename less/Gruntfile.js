@@ -23,6 +23,12 @@ module.exports = function(grunt) {
     },
 
     copy: {
+      js: {
+        src: ['**/*.*', '!remove.*'],
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.dist %>/js',
+        expand: true
+      },
       font: {
         src: ['**/*.*', '!remove.*'],
         cwd: '<%= base.src %>/font',
@@ -39,12 +45,6 @@ module.exports = function(grunt) {
         src: ['**/*.*', '!remove.*'],
         cwd: '<%= base.src %>/css',
         dest: '<%= base.dist %>/css',
-        expand: true
-      },
-      js: {
-        src: ['**/*.*', '!remove.*'],
-        cwd: '<%= base.src %>/js',
-        dest: '<%= base.dist %>/js',
         expand: true
       }
     },
@@ -114,19 +114,27 @@ module.exports = function(grunt) {
       },
       html: {
         files: '<%= base.src %>/**/*.html',
-        tasks: ['build-html']
+        tasks: ['includereplace']
       },
       less: {
         files: '<%= base.src %>/less/**/*.less',
-        tasks: ['build-less']
+        tasks: ['less', 'autoprefixer', 'csscomb']
       },
       js: {
-        files: '<%= base.src %>/js/*.js',
-        tasks: ['build-js']
+        files: '<%= base.src %>/js/*.*',
+        tasks: ['copy:js', 'jshint']
       },
-      assets: {
-        files: '<%= base.src %>/{font,img,css}/*.*',
-        tasks: ['build-assets']
+      font: {
+        files: '<%= base.src %>/font/*.*',
+        tasks: ['copy:font']
+      },
+      img: {
+        files: '<%= base.src %>/img/*.*',
+        tasks: ['copy:img']
+      },
+      css: {
+        files: '<%= base.src %>/css/*.*',
+        tasks: ['copy:css']
       }
     }
   });
@@ -136,33 +144,12 @@ module.exports = function(grunt) {
     'watch'
   ]);
 
-  grunt.registerTask('build-html', [
-    'includereplace'
-  ]);
-
-  grunt.registerTask('build-less', [
-    'less',
-    'autoprefixer',
-    'csscomb'
-  ]);
-
-  grunt.registerTask('build-js', [
-    'copy:js',
-    'jshint'
-  ]);
-
-  grunt.registerTask('build-assets', [
-    'copy:font',
-    'copy:img',
-    'copy:css'
-  ]);
-
   grunt.registerTask('build', [
     'clean:dist',
-    'build-html',
-    'build-assets',
-    'build-less',
-    'build-js',
+    'includereplace',
+    'less', 'autoprefixer', 'csscomb',
+    'copy:js', 'jshint',
+    'copy:font', 'copy:img', 'copy:css',
     'clean:tmp'
   ]);
 
