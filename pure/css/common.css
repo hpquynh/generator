@@ -112,8 +112,8 @@ button {
   visibility: hidden;
 }
 
-.clearfix:before,
-.clearfix:after {
+.clearfix:after,
+.clearfix:before {
   content: " ";
   display: table;
 }
@@ -125,8 +125,8 @@ button {
 /* print */
 @media print {
   *,
-  *:before,
-  *:after {
+  *:after,
+  *:before {
     background: transparent !important;
     color: #000 !important;
     box-shadow: none !important;
