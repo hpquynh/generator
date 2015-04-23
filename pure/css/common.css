@@ -38,10 +38,6 @@ video {
   vertical-align: middle;
 }
 
-img {
-  vertical-align: top;
-}
-
 fieldset {
   border: 0;
   margin: 0;
@@ -75,19 +71,11 @@ a:hover {
   color: #000;
 }
 
-a,
-input,
-textarea,
-button {
-  transition: background-color .2s ease-out, border-color .2s ease-out, color .2s ease-out;
-}
-
 /* helper */
 .hidden {
   display: none !important;
   visibility: hidden;
 }
-
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -107,17 +95,16 @@ button {
   position: static;
   width: auto;
 }
-
 .invisible {
   visibility: hidden;
 }
 
+/* clearfix */
 .clearfix:after,
 .clearfix:before {
   content: " ";
   display: table;
 }
-
 .clearfix:after {
   clear: both;
 }
@@ -132,51 +119,41 @@ button {
     box-shadow: none !important;
     text-shadow: none !important;
   }
-
   a,
   a:visited {
     text-decoration: underline;
   }
-
   a[href]:after {
     content: " (" attr(href) ")";
   }
-
   abbr[title]:after {
     content: " (" attr(title) ")";
   }
-
   a[href^="#"]:after,
   a[href^="javascript:"]:after {
     content: "";
   }
-
   pre,
   blockquote {
     border: 1px solid #999;
     page-break-inside: avoid;
   }
-
   thead {
     display: table-header-group;
   }
-
   tr,
   img {
     page-break-inside: avoid;
   }
-
   img {
     max-width: 100% !important;
   }
-
   p,
   h2,
   h3 {
     orphans: 3;
     widows: 3;
   }
-
   h2,
   h3 {
     page-break-after: avoid;
