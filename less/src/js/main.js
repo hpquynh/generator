@@ -5,7 +5,7 @@
   var App = {
 
     /**
-     * Init Function
+     * Init
      */
     init: function() {
       App.feature();
