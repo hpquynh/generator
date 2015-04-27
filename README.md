@@ -3,10 +3,9 @@ A set of generator to serve multiple purposes. They are for front-end developmen
 
 Copyright (c) 2014 Le Bao Phuc
 
-##Pure & Email
+##Pure
 
 Based on [h5bp.com](http://html5boilerplate.com/) and [its project](http://htmlemailboilerplate.com/), but more simpler.
-For email, there is one more template optimized for real project, beside the original sources.
 
 ##SCSS & LESS
 
