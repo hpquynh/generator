@@ -27,6 +27,10 @@ These are inspired by [XH Generator](https://github.com/xhtmlized/generator-xh) 
 
 ###Release Notes
 
+* 1.5.0:
+  * update jquery
+  * add global styles
+  * update dependencies
 * 1.4.0:
   * remove usemin, concat, uglify, jsbeautifier
   * update csscomb
