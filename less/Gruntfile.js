@@ -129,7 +129,7 @@ module.exports = function(grunt) {
         tasks: ['copy:font']
       },
       img: {
-        files: '<%= base.src %>/img/*.*',
+        files: '<%= base.src %>/img/**/*.*',
         tasks: ['copy:img']
       },
       css: {
