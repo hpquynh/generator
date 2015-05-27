@@ -24,25 +24,25 @@ module.exports = function(grunt) {
 
     copy: {
       js: {
-        src: ['**/*.*', '!remove.*'],
+        src: '**/*.*',
         cwd: '<%= base.src %>/js',
         dest: '<%= base.dist %>/js',
         expand: true
       },
       font: {
-        src: ['**/*.*', '!remove.*'],
+        src: '**/*.*',
         cwd: '<%= base.src %>/font',
         dest: '<%= base.dist %>/font',
         expand: true
       },
       img: {
-        src: ['**/*.*', '!remove.*'],
+        src: '**/*.*',
         cwd: '<%= base.src %>/img',
         dest: '<%= base.dist %>/img',
         expand: true
       },
       css: {
-        src: ['**/*.*', '!remove.*'],
+        src: '**/*.*',
         cwd: '<%= base.src %>/css',
         dest: '<%= base.dist %>/css',
         expand: true
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
           includesDir: '<%= base.includes %>'
         },
         files: [{
-          src: ['*.html', '!template.html'],
+          src: ['**/*.html', '!includes/*.html'],
           cwd: '<%= base.src %>',
           dest: '<%= base.dist %>',
           expand: true
