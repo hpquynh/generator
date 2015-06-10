@@ -119,7 +119,7 @@ module.exports = function(grunt) {
       },
       sass: {
         files: '<%= base.src %>/scss/**/*.scss',
-        tasks: ['sass', 'autoprefixer', 'csscomb']
+        tasks: ['sass', 'autoprefixer']
       },
       js: {
         files: '<%= base.src %>/js/*.*',
@@ -148,9 +148,9 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'includereplace',
+    'copy:font', 'copy:img', 'copy:css',
     'sass', 'autoprefixer', 'csscomb',
     'copy:js', 'jshint',
-    'copy:font', 'copy:img', 'copy:css',
     'clean:tmp'
   ]);
 

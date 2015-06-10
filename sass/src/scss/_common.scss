@@ -6,24 +6,24 @@
 
 /* visuallyhidden */
 .visuallyhidden {
-  border: 0;
-  clip: rect(0 0 0 0);
+  position: absolute;
+  width: 1px;
   height: 1px;
   margin: -1px;
   overflow: hidden;
   padding: 0;
-  position: absolute;
-  width: 1px;
+  border: 0;
+  clip: rect(0 0 0 0);
 
   &.focusable {
     &:active,
     &:focus {
-      clip: auto;
+      position: static;
+      width: auto;
       height: auto;
       margin: 0;
       overflow: visible;
-      position: static;
-      width: auto;
+      clip: auto;
     }
   }
 }
@@ -35,20 +35,28 @@
 
 /* global */
 html {
+  font: {
+    family: $font-arial;
+    size: $font-base;
+  }
+  line-height: 1.5;
   background-color: $color-white;
   color: $color-black;
-  font-family: $font-arial;
-  font-size: $font-base;
-  line-height: 1.5;
+  box-sizing: border-box;
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
 }
 img {
   vertical-align: top;
 }
 a {
-  color: $color-black;
-  text-decoration: none;
+  color: $color-red;
+  text-decoration: underline;
 
   &:hover {
-    color: $color-black;
+    text-decoration: none;
   }
 }

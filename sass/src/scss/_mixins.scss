@@ -1,5 +1,5 @@
-// Clearfix
-@mixin clearfix {
+// Use with @extend %clearfix;
+%clearfix {
   &:after,
   &:before {
     content: " ";

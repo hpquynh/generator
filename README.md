@@ -1,6 +1,6 @@
 #Front-end Generators
 
-Copyright (c) 2015 Le Bao Phuc
+Copyright (c) 2015 iLucians
 
 ##Pure
 
@@ -14,4 +14,4 @@ These are inspired by [XH Generator](https://github.com/xhtmlized/generator-xh) 
 
 This is licensed under the MIT license.
 
-**Made with Love & iLu**
+**Built with Love & iLu**
