@@ -9,8 +9,8 @@
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: -1px;
   overflow: hidden;
+  margin: -1px;
   padding: 0;
   border: 0;
   clip: rect(0 0 0 0);
@@ -21,8 +21,8 @@
       position: static;
       width: auto;
       height: auto;
-      margin: 0;
       overflow: visible;
+      margin: 0;
       clip: auto;
     }
   }
@@ -40,18 +40,21 @@ html {
     size: $font-base;
   }
   line-height: 1.5;
+  box-sizing: border-box;
   background-color: $color-white;
   color: $color-black;
-  box-sizing: border-box;
 }
+
 *,
 *:after,
 *:before {
   box-sizing: inherit;
 }
+
 img {
   vertical-align: top;
 }
+
 a {
   color: $color-red;
   text-decoration: underline;
