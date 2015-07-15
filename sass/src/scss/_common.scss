@@ -1,48 +1,15 @@
-/* hidden */
-.hidden {
-  display: none !important;
-  visibility: hidden;
-}
+// Common
+//------------------------------------------------------------------------------
 
-/* visuallyhidden */
-.visuallyhidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  clip: rect(0 0 0 0);
-
-  &.focusable {
-    &:active,
-    &:focus {
-      position: static;
-      width: auto;
-      height: auto;
-      overflow: visible;
-      margin: 0;
-      clip: auto;
-    }
-  }
-}
-
-/* invisible */
-.invisible {
-  visibility: hidden;
-}
-
-/* global */
 html {
+  box-sizing: border-box;
   font: {
     family: $font-arial;
     size: $font-base;
   }
   line-height: 1.5;
-  box-sizing: border-box;
   background-color: $color-white;
-  color: $color-black;
+  color: black;
 }
 
 *,
@@ -56,10 +23,9 @@ img {
 }
 
 a {
-  color: $color-red;
-  text-decoration: underline;
+  color: red;
+  text-decoration: none;
 
   &:hover {
-    text-decoration: none;
   }
 }

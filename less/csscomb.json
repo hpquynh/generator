@@ -8,7 +8,6 @@
   "eof-newline": true,
   "leading-zero": true,
   "quotes": "double",
-  "sort-order-fallback": "abc",
   "space-before-colon": "",
   "space-after-colon": " ",
   "space-before-combinator": " ",
@@ -21,6 +20,5 @@
   "space-before-closing-brace": "\n",
   "strip-spaces": true,
   "tab-size": true,
-  "unitless-zero": true,
-  "vendor-prefix-align": true
+  "unitless-zero": true
 }
