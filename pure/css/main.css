@@ -1,4 +1,4 @@
-/* common */
+/* ========== COMMON ========== */
 html {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -26,18 +26,18 @@ a:hover {
   color: #000;
 }
 
-/* container */
+/* ========== CONTAINER ========== */
 .container {
 }
 
-/* header */
+/* ========== HEADER ========== */
 .header {
 }
 
-/* footer */
+/* ========== FOOTER ========== */
 .footer {
 }
 
-/* main */
+/* ========== MAIN ========== */
 .main {
 }
