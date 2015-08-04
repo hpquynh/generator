@@ -1,1 +1,1 @@
-npm-check-updates -u
+ncu -u
