@@ -1,11 +1,11 @@
-/* ========== COMMON ========== */
+/* -------------------->>> COMMON <<<-------------------- */
 html {
+  background-color: #fff;
+  box-sizing: border-box;
+  color: #000;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.5;
-  background-color: #fff;
-  color: #000;
-  box-sizing: border-box;
 }
 
 *,
@@ -26,18 +26,18 @@ a:hover {
   color: #000;
 }
 
-/* ========== CONTAINER ========== */
+/* -------------------->>> CONTAINER <<<-------------------- */
 .container {
 }
 
-/* ========== HEADER ========== */
+/* -------------------->>> HEADER <<<-------------------- */
 .header {
 }
 
-/* ========== FOOTER ========== */
+/* -------------------->>> FOOTER <<<-------------------- */
 .footer {
 }
 
-/* ========== MAIN ========== */
+/* -------------------->>> MAIN <<<-------------------- */
 .main {
 }

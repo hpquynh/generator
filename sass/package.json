@@ -1,14 +1,14 @@
 {
   "name": "iLucians",
   "description": "Generator",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "repository": {
     "type": "git",
     "url": ""
   },
   "devDependencies": {
+    "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
-    "grunt-autoprefixer": "^3.0.3",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-copy": "^0.8.0",
     "grunt-contrib-jshint": "^0.11.2",
@@ -16,6 +16,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-csscomb": "^3.0.1",
     "grunt-include-replace": "^3.0.0",
+    "grunt-postcss": "^0.5.5",
     "jit-grunt": "^0.9.1",
     "time-grunt": "^1.2.1"
   }

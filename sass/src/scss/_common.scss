@@ -1,14 +1,12 @@
-/* ========== COMMON ========== */
-
+/* -------------------->>> COMMON <<<-------------------- */
 html {
-  box-sizing: border-box;
-  font: {
-    family: $font-arial;
-    size: $font-base;
-  }
-  line-height: 1.5;
   background-color: $color-white;
+  box-sizing: border-box;
   color: black;
+  font-family: $font-arial;
+  font-size: $font-base;
+  line-height: 1.5;
+  transform: scale(0.5);
 }
 
 *,

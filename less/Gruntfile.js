@@ -79,11 +79,12 @@ module.exports = function(grunt) {
       }
     },
 
-    autoprefixer: {
+    postcss: {
       options: {
-        browsers: ['last 3 versions', 'ie 9'],
-        cascade: false,
-        remove: true
+        map: false,
+        processors: [
+          require('autoprefixer-core')({browsers: ['last 3 versions', 'ie 9'], cascade: false, remove: true})
+        ]
       },
       main: {
         src: '<%= base.dist %>/css/main.css',
@@ -120,7 +121,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: '<%= base.src %>/less/**/*.less',
-        tasks: ['less', 'autoprefixer']
+        tasks: ['less', 'postcss']
       },
       js: {
         files: '<%= base.src %>/js/*.*',
@@ -150,7 +151,7 @@ module.exports = function(grunt) {
     'clean:dist',
     'includereplace',
     'copy:font', 'copy:img', 'copy:css',
-    'less', 'autoprefixer', 'csscomb',
+    'less', 'postcss', 'csscomb',
     'copy:js', 'jshint',
     'clean:tmp'
   ]);
