@@ -83,7 +83,7 @@ module.exports = function(grunt) {
       options: {
         map: false,
         processors: [
-          require('autoprefixer-core')({browsers: ['last 3 versions', 'ie 9'], cascade: false, remove: true})
+          require('autoprefixer')({browsers: ['last 3 versions', 'ie 9'], cascade: false, remove: true})
         ]
       },
       main: {
