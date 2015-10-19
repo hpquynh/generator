@@ -1,10 +1,10 @@
 /* -------------------->>> COMMON <<<-------------------- */
 html {
-  background-color: $color-white;
+  background-color: $c-white;
   box-sizing: border-box;
-  color: black;
-  font-family: $font-arial;
-  font-size: $font-base;
+  color: $c-black;
+  font-family: $ff-arial;
+  font-size: $fs-base;
   line-height: 1.5;
 }
 
@@ -19,7 +19,6 @@ img {
 }
 
 a {
-  color: red;
   text-decoration: none;
 
   &:hover {
