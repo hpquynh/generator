@@ -16,7 +16,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-csscomb": "^3.1.0",
     "grunt-include-replace": "^3.2.0",
-    "grunt-postcss": "^0.7.0",
+    "grunt-postcss": "^0.7.1",
     "jit-grunt": "^0.9.1",
     "time-grunt": "^1.2.2"
   }
