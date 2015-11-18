@@ -23,6 +23,12 @@ module.exports = function(grunt) {
     },
 
     copy: {
+      css: {
+        src: '**/*.*',
+        cwd: '<%= base.src %>/css',
+        dest: '<%= base.dist %>/css',
+        expand: true
+      },
       js: {
         src: '**/*.*',
         cwd: '<%= base.src %>/js',
@@ -40,12 +46,6 @@ module.exports = function(grunt) {
         cwd: '<%= base.src %>/img',
         dest: '<%= base.dist %>/img',
         expand: true
-      },
-      css: {
-        src: '**/*.*',
-        cwd: '<%= base.src %>/css',
-        dest: '<%= base.dist %>/css',
-        expand: true
       }
     },
 
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
           includesDir: '<%= base.includes %>'
         },
         files: [{
-          src: ['**/*.html', '!includes/*.html'],
+          src: '*.html',
           cwd: '<%= base.src %>',
           dest: '<%= base.dist %>',
           expand: true
@@ -83,7 +83,11 @@ module.exports = function(grunt) {
       options: {
         map: false,
         processors: [
-          require('autoprefixer')({browsers: ['last 3 versions', 'ie 9'], cascade: false, remove: true})
+          require('autoprefixer')({
+            browsers: ['last 3 versions', 'ie 9'],
+            cascade: false,
+            remove: true
+          })
         ]
       },
       main: {
@@ -94,13 +98,9 @@ module.exports = function(grunt) {
 
     csscomb: {
       options: {
-        config: 'csscomb.json'
+        config: '.csscomb.json'
       },
-      dist: {
-        files: {
-          '<%= base.dist %>/css/main.css': ['<%= base.dist %>/css/main.css']
-        }
-      }
+      files: '<%= base.dist %>/css/main.css'
     },
 
     jshint: {
@@ -116,15 +116,19 @@ module.exports = function(grunt) {
         spawn: false
       },
       html: {
-        files: '<%= base.src %>/**/*.html',
+        files: ['<%= base.src %>/*.html', '<%= base.includes %>/*.html'],
         tasks: ['includereplace']
       },
-      less: {
-        files: '<%= base.src %>/less/**/*.less',
-        tasks: ['less', 'postcss']
+      sass: {
+        files: '<%= base.src %>/scss/*.scss',
+        tasks: ['sass', 'postcss']
+      },
+      css: {
+        files: '<%= base.src %>/css/*.css',
+        tasks: ['copy:css']
       },
       js: {
-        files: '<%= base.src %>/js/*.*',
+        files: '<%= base.src %>/js/*.js',
         tasks: ['copy:js', 'jshint']
       },
       font: {
@@ -134,10 +138,6 @@ module.exports = function(grunt) {
       img: {
         files: '<%= base.src %>/img/**/*.*',
         tasks: ['copy:img']
-      },
-      css: {
-        files: '<%= base.src %>/css/*.*',
-        tasks: ['copy:css']
       }
     }
   });
@@ -150,7 +150,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'includereplace',
-    'copy:font', 'copy:img', 'copy:css',
+    'copy:css', 'copy:font', 'copy:img',
     'less', 'postcss', 'csscomb',
     'copy:js', 'jshint',
     'clean:tmp'
