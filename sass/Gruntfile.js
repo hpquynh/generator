@@ -13,7 +13,7 @@ module.exports = function(grunt) {
     base: {
       src: 'src',
       dist: 'dist',
-      temp: 'temp',
+      temp: ['temp', 'files'],
       includes: '<%= base.src %>/includes'
     },
 
