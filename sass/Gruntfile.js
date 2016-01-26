@@ -11,40 +11,40 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     base: {
-      src: 'src',
-      dist: 'dist',
+      src: 'source',
+      pub: 'public',
       temp: ['temp', 'files'],
       includes: '<%= base.src %>/includes'
     },
 
     clean: {
       tmp: '<%= base.temp %>',
-      dist: '<%= base.dist %>'
+      pub: '<%= base.pub %>'
     },
 
     copy: {
       css: {
         src: '**/*.*',
         cwd: '<%= base.src %>/css',
-        dest: '<%= base.dist %>/css',
+        dest: '<%= base.pub %>/css',
         expand: true
       },
       js: {
         src: '**/*.*',
         cwd: '<%= base.src %>/js',
-        dest: '<%= base.dist %>/js',
+        dest: '<%= base.pub %>/js',
         expand: true
       },
       font: {
         src: '**/*.*',
         cwd: '<%= base.src %>/font',
-        dest: '<%= base.dist %>/font',
+        dest: '<%= base.pub %>/font',
         expand: true
       },
       img: {
         src: '**/*.*',
         cwd: '<%= base.src %>/img',
-        dest: '<%= base.dist %>/img',
+        dest: '<%= base.pub %>/img',
         expand: true
       }
     },
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         files: [{
           src: '*.html',
           cwd: '<%= base.src %>',
-          dest: '<%= base.dist %>',
+          dest: '<%= base.pub %>',
           expand: true
         }]
       }
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         files: [{
           src: 'main.scss',
           cwd: '<%= base.src %>/scss',
-          dest: '<%= base.dist %>/css',
+          dest: '<%= base.pub %>/css',
           ext: '.css',
           expand: true
         }]
@@ -85,15 +85,15 @@ module.exports = function(grunt) {
         map: false,
         processors: [
           require('autoprefixer')({
-            browsers: ['last 3 versions', 'ie 9'],
+            browsers: ['last 2 versions', 'ie 9'],
             cascade: false,
             remove: true
           })
         ]
       },
       main: {
-        src: '<%= base.dist %>/css/main.css',
-        dest: '<%= base.dist %>/css/main.css'
+        src: '<%= base.pub %>/css/main.css',
+        dest: '<%= base.pub %>/css/main.css'
       }
     },
 
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
       options: {
         config: '.csscomb.json'
       },
-      files: '<%= base.dist %>/css/main.css'
+      files: '<%= base.pub %>/css/main.css'
     },
 
     jshint: {
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-    'clean:dist',
+    'clean:pub',
     'includereplace',
     'copy:css', 'copy:font', 'copy:img',
     'sass', 'postcss', 'csscomb',
