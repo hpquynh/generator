@@ -14,7 +14,7 @@ module.exports = function(grunt) {
       src: 'source',
       pub: 'public',
       temp: ['temp', 'files'],
-      includes: '<%= base.src %>/includes'
+      template: '<%= base.src %>/template'
     },
 
     clean: {
@@ -25,26 +25,26 @@ module.exports = function(grunt) {
     copy: {
       css: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/css',
-        dest: '<%= base.pub %>/css',
+        cwd: '<%= base.src %>/stylesheet',
+        dest: '<%= base.pub %>/assets/stylesheet',
         expand: true
       },
       js: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/js',
-        dest: '<%= base.pub %>/js',
+        cwd: '<%= base.src %>/javascript',
+        dest: '<%= base.pub %>/assets/javascript',
         expand: true
       },
       font: {
         src: '**/*.*',
         cwd: '<%= base.src %>/font',
-        dest: '<%= base.pub %>/font',
+        dest: '<%= base.pub %>/assets/font',
         expand: true
       },
       img: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/img',
-        dest: '<%= base.pub %>/img',
+        cwd: '<%= base.src %>/image',
+        dest: '<%= base.pub %>/assets/image',
         expand: true
       }
     },
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
     includereplace: {
       dist: {
         options: {
-          includesDir: '<%= base.includes %>'
+          includesDir: '<%= base.template %>'
         },
         files: [{
           src: '*.html',
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         files: [{
           src: 'main.scss',
           cwd: '<%= base.src %>/scss',
-          dest: '<%= base.pub %>/css',
+          dest: '<%= base.pub %>/assets/stylesheet',
           ext: '.css',
           expand: true
         }]
@@ -92,8 +92,8 @@ module.exports = function(grunt) {
         ]
       },
       main: {
-        src: '<%= base.pub %>/css/main.css',
-        dest: '<%= base.pub %>/css/main.css'
+        src: '<%= base.pub %>/assets/stylesheet/main.css',
+        dest: '<%= base.pub %>/assets/stylesheet/main.css'
       }
     },
 
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
       options: {
         config: '.csscomb.json'
       },
-      files: '<%= base.pub %>/css/main.css'
+      files: '<%= base.pub %>/assets/stylesheet/main.css'
     },
 
     jshint: {
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
         jshintrc: true,
         force: true
       },
-      files: '<%= base.src %>/js/main.js'
+      files: '<%= base.src %>/assets/javascript/main.js'
     },
 
     watch: {
@@ -117,7 +117,7 @@ module.exports = function(grunt) {
         spawn: false
       },
       html: {
-        files: ['<%= base.src %>/*.html', '<%= base.includes %>/*.html'],
+        files: ['<%= base.src %>/*.html', '<%= base.template %>/*.html'],
         tasks: ['includereplace']
       },
       sass: {
@@ -125,11 +125,11 @@ module.exports = function(grunt) {
         tasks: ['sass', 'postcss']
       },
       css: {
-        files: '<%= base.src %>/css/*.css',
+        files: '<%= base.src %>/stylesheet/*.css',
         tasks: ['copy:css']
       },
       js: {
-        files: '<%= base.src %>/js/*.js',
+        files: '<%= base.src %>/javascript/*.js',
         tasks: ['copy:js', 'jshint']
       },
       font: {
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
         tasks: ['copy:font']
       },
       img: {
-        files: '<%= base.src %>/img/*.*',
+        files: '<%= base.src %>/image/*.*',
         tasks: ['copy:img']
       }
     }
