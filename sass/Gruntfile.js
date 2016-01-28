@@ -25,14 +25,14 @@ module.exports = function(grunt) {
     copy: {
       css: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/stylesheet',
-        dest: '<%= base.pub %>/assets/stylesheet',
+        cwd: '<%= base.src %>/css',
+        dest: '<%= base.pub %>/assets/css',
         expand: true
       },
       js: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/javascript',
-        dest: '<%= base.pub %>/assets/javascript',
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.pub %>/assets/js',
         expand: true
       },
       font: {
@@ -43,8 +43,8 @@ module.exports = function(grunt) {
       },
       img: {
         src: '**/*.*',
-        cwd: '<%= base.src %>/image',
-        dest: '<%= base.pub %>/assets/image',
+        cwd: '<%= base.src %>/img',
+        dest: '<%= base.pub %>/assets/img',
         expand: true
       }
     },
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         files: [{
           src: 'main.scss',
           cwd: '<%= base.src %>/scss',
-          dest: '<%= base.pub %>/assets/stylesheet',
+          dest: '<%= base.pub %>/assets/css',
           ext: '.css',
           expand: true
         }]
@@ -92,8 +92,8 @@ module.exports = function(grunt) {
         ]
       },
       main: {
-        src: '<%= base.pub %>/assets/stylesheet/main.css',
-        dest: '<%= base.pub %>/assets/stylesheet/main.css'
+        src: '<%= base.pub %>/assets/css/main.css',
+        dest: '<%= base.pub %>/assets/css/main.css'
       }
     },
 
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
       options: {
         config: '.csscomb.json'
       },
-      files: '<%= base.pub %>/assets/stylesheet/main.css'
+      files: '<%= base.pub %>/assets/css/main.css'
     },
 
     jshint: {
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
         jshintrc: true,
         force: true
       },
-      files: '<%= base.src %>/assets/javascript/main.js'
+      files: '<%= base.src %>/assets/js/main.js'
     },
 
     watch: {
@@ -125,11 +125,11 @@ module.exports = function(grunt) {
         tasks: ['sass', 'postcss']
       },
       css: {
-        files: '<%= base.src %>/stylesheet/*.css',
+        files: '<%= base.src %>/css/*.css',
         tasks: ['copy:css']
       },
       js: {
-        files: '<%= base.src %>/javascript/*.js',
+        files: '<%= base.src %>/js/*.js',
         tasks: ['copy:js', 'jshint']
       },
       font: {
@@ -137,7 +137,7 @@ module.exports = function(grunt) {
         tasks: ['copy:font']
       },
       img: {
-        files: '<%= base.src %>/image/*.*',
+        files: '<%= base.src %>/img/*.*',
         tasks: ['copy:img']
       }
     }
