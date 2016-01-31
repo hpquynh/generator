@@ -107,9 +107,9 @@ module.exports = function(grunt) {
     jshint: {
       options: {
         jshintrc: true,
-        force: true
+        force: false
       },
-      files: '<%= base.src %>/assets/js/main.js'
+      files: '<%= base.src %>/js/main.js'
     },
 
     watch: {
@@ -153,7 +153,7 @@ module.exports = function(grunt) {
     'includereplace',
     'copy:css', 'copy:font', 'copy:img',
     'sass', 'postcss', 'csscomb',
-    'copy:js', 'jshint',
+    'jshint', 'copy:js',
     'clean:tmp'
   ]);
 
