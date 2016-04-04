@@ -3,7 +3,8 @@ module.exports = function(grunt) {
 
   require('time-grunt')(grunt);
   require('jit-grunt')(grunt, {
-    includereplace: 'grunt-include-replace'
+    includereplace: 'grunt-include-replace',
+    replace: 'grunt-text-replace'
   });
 
   // Config
@@ -13,12 +14,12 @@ module.exports = function(grunt) {
     base: {
       src: 'source',
       pub: 'public',
-      temp: ['temp', 'files'],
+      tmp: ['files', 'csstoc.json'],
       template: '<%= base.src %>/template'
     },
 
     clean: {
-      tmp: '<%= base.temp %>',
+      tmp: '<%= base.tmp %>',
       pub: '<%= base.pub %>'
     },
 
@@ -121,7 +122,7 @@ module.exports = function(grunt) {
       },
       less: {
         files: '<%= base.src %>/less/*.less',
-        tasks: ['less', 'postcss']
+        tasks: ['sass', 'postcss', 'csscomb', 'search', 'replace:css']
       },
       css: {
         files: '<%= base.src %>/css/*.css',
@@ -139,6 +140,71 @@ module.exports = function(grunt) {
         files: '<%= base.src %>/img/*.*',
         tasks: ['copy:img']
       }
+    },
+
+    search: {
+      imports: {
+        files: {
+          src: '<%= base.src %>/less/*.less'
+        },
+        options: {
+          searchString: /@import[ \("']*([^;]+)[;\)"']*/g,
+          logFormat: 'json',
+          logFile: 'csstoc.json'
+        }
+      }
+    },
+
+    replace: {
+      css: {
+        src: ['<%= base.pub %>/assets/css/main.css'],
+        overwrite: true,
+        replacements: [{
+          from: '@@toc',
+          to: function () {
+            if (!grunt.file.exists('csstoc.json')) {
+              return '';
+            }
+
+            var tocFile = grunt.file.readJSON('csstoc.json');
+            var files = tocFile.results;
+            var toc = '';
+            var i = 1;
+            var match;
+
+            function capitalize(s) {
+              return s[0].toUpperCase() + s.slice(1);
+            }
+
+            for (var file in files) {
+              if (files.hasOwnProperty(file)) {
+                var results = files[file];
+                for (var res in results) {
+                  if (results.hasOwnProperty(res)) {
+                    match = results[res].match;
+                    match = match.replace(/"|'|@import|;|.scss|.less/gi, '').trim();
+                    match = match.split('/').pop();
+                    match = capitalize(match);
+                    if (['Variables', 'Mixins', 'Placeholders'].indexOf(match) === -1) {
+                      if (i === 1) {
+                        toc += i + '. ' + match;
+                      } else {
+                        toc += '\n  ' + i + '. ' + match;
+                      }
+                      i++;
+                    }
+                  }
+                }
+              }
+            }
+            return toc;
+          }
+        },
+        {
+          from: /\/\*\*/g,
+          to: '\n/**'
+        }]
+      }
     }
   });
 
@@ -152,6 +218,7 @@ module.exports = function(grunt) {
     'includereplace',
     'copy:css', 'copy:font', 'copy:img',
     'less', 'postcss', 'csscomb',
+    'search', 'replace:css',
     'jshint', 'copy:js',
     'clean:tmp'
   ]);
