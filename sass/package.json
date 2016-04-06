@@ -2,6 +2,7 @@
   "name": "generator",
   "version": "4.0.0",
   "description": "A front-end generator for scaffolding web projects",
+  "repository": "phuclb/generator",
   "license": "MIT",
   "author": {
     "name": "Phuc Le",
