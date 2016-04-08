@@ -202,8 +202,8 @@ module.exports = function(grunt) {
           }
         },
         {
-          from: /\/\*\*/g,
-          to: '\n/**'
+          from: /\/\*/g,
+          to: '\n/*'
         }]
       }
     }
