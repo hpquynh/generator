@@ -167,14 +167,16 @@ module.exports = function(grunt) {
               return '';
             }
 
-            var tocFile = grunt.file.readJSON('csstoc.json');
-            var files = tocFile.results;
-            var toc = '';
-            var i = 1;
-            var match;
+            var tocFile = grunt.file.readJSON('csstoc.json'), files = tocFile.results, toc = '', i = 1, match;
 
             function capitalize(s) {
-              return s[0].toUpperCase() + s.slice(1);
+              var s = s.toLowerCase().split(' ');
+              for (var i = 0; i < s.length; i++) {
+                s[i] = s[i].split('');
+                s[i][0] = s[i][0].toUpperCase();
+                s[i] = s[i].join('');
+              }
+              return s.join(' ');
             }
 
             for (var file in files) {
@@ -183,10 +185,11 @@ module.exports = function(grunt) {
                 for (var res in results) {
                   if (results.hasOwnProperty(res)) {
                     match = results[res].match;
-                    match = match.replace(/"|'|@import|;|.scss|.less/gi, '').trim();
+                    match = match.replace(/"|'|@import|;|.scss/gi, '').trim();
+                    match = match.replace('-', ' ').trim();
                     match = match.split('/').pop();
                     match = capitalize(match);
-                    if (['Variables', 'Mixins', 'Placeholders'].indexOf(match) === -1) {
+                    if (['Variables', 'Mixins'].indexOf(match) === -1) {
                       if (i === 1) {
                         toc += i + '. ' + match;
                       } else {
