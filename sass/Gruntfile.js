@@ -122,7 +122,7 @@ module.exports = function(grunt) {
         tasks: ['includereplace']
       },
       sass: {
-        files: '<%= base.src %>/scss/*.scss',
+        files: '<%= base.src %>/scss/**/*.scss',
         tasks: ['sass', 'postcss', 'csscomb', 'search', 'replace:css']
       },
       css: {
