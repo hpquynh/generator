@@ -24,12 +24,6 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      css: {
-        src: '**/*.*',
-        cwd: '<%= base.src %>/css',
-        dest: '<%= base.pub %>/assets/css',
-        expand: true
-      },
       js: {
         src: '**/*.*',
         cwd: '<%= base.src %>/js',
@@ -124,20 +118,16 @@ module.exports = function(grunt) {
         files: '<%= base.src %>/less/**/*.less',
         tasks: ['sass', 'postcss', 'csscomb', 'search', 'replace:css']
       },
-      css: {
-        files: '<%= base.src %>/css/*.css',
-        tasks: ['copy:css']
-      },
       js: {
-        files: '<%= base.src %>/js/*.js',
+        files: '<%= base.src %>/js/**/*.js',
         tasks: ['copy:js', 'jshint']
       },
       font: {
-        files: '<%= base.src %>/font/*.*',
+        files: '<%= base.src %>/font/**/*.*',
         tasks: ['copy:font']
       },
       img: {
-        files: '<%= base.src %>/img/*.*',
+        files: '<%= base.src %>/img/**/*.*',
         tasks: ['copy:img']
       }
     },
@@ -219,7 +209,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'clean:pub',
     'includereplace',
-    'copy:css', 'copy:font', 'copy:img',
+    'copy:font', 'copy:img',
     'less', 'postcss', 'csscomb',
     'search', 'replace:css',
     'jshint', 'copy:js',
