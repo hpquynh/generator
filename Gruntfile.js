@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       src: 'source',
       pub: 'public',
       tmp: ['files', 'csstoc.json'],
-      template: '<%= base.src %>/template'
+      include: '<%= base.src %>/include'
     },
 
     clean: {
@@ -23,13 +23,29 @@ module.exports = function(grunt) {
       pub: '<%= base.pub %>'
     },
 
-    copy: {
-      js: {
-        src: '**/*.*',
-        cwd: '<%= base.src %>/js',
-        dest: '<%= base.pub %>/assets/js',
-        expand: true
+    includereplace: {
+      dist: {
+        options: {
+          includesDir: '<%= base.include %>'
+        },
+        files: [{
+          src: '*.html',
+          cwd: '<%= base.src %>',
+          dest: '<%= base.pub %>',
+          expand: true
+        }]
+      }
+    },
+
+    jshint: {
+      options: {
+        jshintrc: true,
+        force: false
       },
+      files: '<%= base.src %>/js/main.js'
+    },
+
+    copy: {
       font: {
         src: '**/*.*',
         cwd: '<%= base.src %>/font',
@@ -41,32 +57,25 @@ module.exports = function(grunt) {
         cwd: '<%= base.src %>/img',
         dest: '<%= base.pub %>/assets/img',
         expand: true
+      },
+      js: {
+        src: '**/*.*',
+        cwd: '<%= base.src %>/js',
+        dest: '<%= base.pub %>/assets/js',
+        expand: true
       }
     },
 
-    includereplace: {
+    sass: {
       dist: {
         options: {
-          includesDir: '<%= base.template %>'
+          sourcemap: 'none',
+          noCache: true,
+          style: 'expanded'
         },
         files: [{
-          src: '*.html',
-          cwd: '<%= base.src %>',
-          dest: '<%= base.pub %>',
-          expand: true
-        }]
-      }
-    },
-
-    less: {
-      dist: {
-        options: {
-          sourceMap: false,
-          compress: false
-        },
-        files: [{
-          src: 'main.less',
-          cwd: '<%= base.src %>/less',
+          src: 'main.scss',
+          cwd: '<%= base.src %>/scss',
           dest: '<%= base.pub %>/assets/css',
           ext: '.css',
           expand: true
@@ -79,7 +88,7 @@ module.exports = function(grunt) {
         map: false,
         processors: [
           require('autoprefixer')({
-            browsers: ['last 5 versions', 'ie 9'],
+            browsers: ['last 3 versions', 'ie 9'],
             cascade: false,
             remove: true
           })
@@ -98,24 +107,16 @@ module.exports = function(grunt) {
       files: '<%= base.pub %>/assets/css/main.css'
     },
 
-    jshint: {
-      options: {
-        jshintrc: true,
-        force: true
-      },
-      files: '<%= base.src %>/js/main.js'
-    },
-
     watch: {
       options: {
         spawn: false
       },
       html: {
-        files: ['<%= base.src %>/*.html', '<%= base.template %>/*.html'],
+        files: ['<%= base.src %>/*.html', '<%= base.include %>/*.html'],
         tasks: ['includereplace']
       },
-      less: {
-        files: '<%= base.src %>/less/**/*.less',
+      sass: {
+        files: '<%= base.src %>/scss/**/*.scss',
         tasks: ['sass', 'postcss', 'csscomb', 'search', 'replace:css']
       },
       js: {
@@ -135,7 +136,7 @@ module.exports = function(grunt) {
     search: {
       imports: {
         files: {
-          src: '<%= base.src %>/less/*.less'
+          src: '<%= base.src %>/scss/*.scss'
         },
         options: {
           searchString: /@import[ \("']*([^;]+)[;\)"']*/g,
@@ -179,8 +180,8 @@ module.exports = function(grunt) {
                     match = match.split('/').pop();
                     match = capitalize(match);
                     if (['Variables', 'Mixins'].indexOf(match) === -1) {
-                      if (i === 1) {
-                        toc += i + '. ' + match;
+                      if (i < 10) {
+                        toc += '\n  0' + i + '. ' + match;
                       } else {
                         toc += '\n  ' + i + '. ' + match;
                       }
@@ -208,11 +209,10 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:pub',
-    'includereplace',
-    'copy:font', 'copy:img',
-    'less', 'postcss', 'csscomb',
-    'search', 'replace:css',
+    'includereplace', 'copy:font', 'copy:img',
     'jshint', 'copy:js',
+    'sass', 'postcss', 'csscomb',
+    'search', 'replace:css',
     'clean:tmp'
   ]);
 

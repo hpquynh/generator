@@ -1,15 +1,17 @@
 /**
 --------------------------------------------------
-  Common
+  Reset
 --------------------------------------------------
 **/
 html {
-  font-family: @ff-arial;
-  font-size: @fs-base;
+  font: {
+    family: $ff-arial;
+    size: $fs-base;
+  }
   line-height: 1.5;
-  background-color: @c-white;
+  background-color: $c-white;
   box-sizing: border-box;
-  color: @c-black;
+  color: $c-black;
 }
 
 *,

@@ -9,7 +9,6 @@
   "curly": true,
   "globals": {
     "console": true,
-    "alert": false,
-    "Modernizr": true
+    "alert": false
   }
 }

@@ -1,3 +1,0 @@
-# Readme!
-
-Enjoy! ;)
