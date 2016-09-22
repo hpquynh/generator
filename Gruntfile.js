@@ -195,8 +195,12 @@ module.exports = function(grunt) {
           }
         },
         {
-          from: /\/\*/g,
+          from: '/*',
           to: '\n/*'
+        },
+        {
+          from: '\n\n\n/*',
+          to: '\n\n/*'
         }]
       }
     }
