@@ -7,22 +7,19 @@ module.exports = function(grunt) {
     replace: 'grunt-text-replace'
   });
 
-  // Config
+  // Init
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
     base: {
       src: 'source',
       pub: 'public',
       tmp: ['files', 'csstoc.json'],
       include: '<%= base.src %>/include'
     },
-
     clean: {
       tmp: '<%= base.tmp %>',
       pub: '<%= base.pub %>'
     },
-
     includereplace: {
       dist: {
         options: {
@@ -36,7 +33,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-
     jshint: {
       options: {
         jshintrc: true,
@@ -44,7 +40,6 @@ module.exports = function(grunt) {
       },
       files: '<%= base.src %>/js/main.js'
     },
-
     copy: {
       font: {
         src: '**/*.*',
@@ -65,7 +60,6 @@ module.exports = function(grunt) {
         expand: true
       }
     },
-
     sass: {
       dist: {
         options: {
@@ -82,7 +76,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-
     postcss: {
       options: {
         map: false,
@@ -99,14 +92,12 @@ module.exports = function(grunt) {
         dest: '<%= base.pub %>/assets/css/main.css'
       }
     },
-
     csscomb: {
       options: {
         config: '.csscomb.json'
       },
       files: '<%= base.pub %>/assets/css/main.css'
     },
-
     watch: {
       options: {
         spawn: false
@@ -132,7 +123,6 @@ module.exports = function(grunt) {
         tasks: ['copy:img']
       }
     },
-
     search: {
       imports: {
         files: {
@@ -145,7 +135,6 @@ module.exports = function(grunt) {
         }
       }
     },
-
     replace: {
       css: {
         src: ['<%= base.pub %>/assets/css/main.css'],
@@ -210,7 +199,6 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'watch'
   ]);
-
   grunt.registerTask('build', [
     'clean:pub',
     'includereplace', 'copy:font', 'copy:img',

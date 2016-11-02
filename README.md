@@ -1,4 +1,4 @@
-#Front-end SASS Generators
+#Front-end Generator
 
 Copyright (c) 2016 iLucians
 
